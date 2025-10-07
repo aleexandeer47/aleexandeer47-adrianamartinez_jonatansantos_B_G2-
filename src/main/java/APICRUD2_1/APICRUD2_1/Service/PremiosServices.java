@@ -1,10 +1,13 @@
 package APICRUD2_1.APICRUD2_1.Service;
 
+import APICRUD2_1.APICRUD2_1.Entities.PeliculasEntity;
 import APICRUD2_1.APICRUD2_1.Entities.PremiosEntity;
 import APICRUD2_1.APICRUD2_1.Exceptions.ExceptionPeliculaNoEncontrada;
 import APICRUD2_1.APICRUD2_1.Exceptions.ExceptionPremiosNoEncontrado;
 import APICRUD2_1.APICRUD2_1.Exceptions.ExceptionPremiosrelacionadosConPelicula;
+import APICRUD2_1.APICRUD2_1.Models.DTO.DTOPeliculas;
 import APICRUD2_1.APICRUD2_1.Models.DTO.DTOPremios;
+import APICRUD2_1.APICRUD2_1.Repositories.PeliculasRepository;
 import APICRUD2_1.APICRUD2_1.Repositories.PremiosRepository;
 import jakarta.persistence.Entity;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +24,9 @@ public class PremiosServices {
 
     @Autowired
     private PremiosRepository repo;
+
+    @Autowired
+    private PeliculasRepository peliculasRepository;
 
 
 
@@ -84,11 +90,13 @@ public class PremiosServices {
         }
 
 
-        //OBTENER
+        //OBTENER  PREMIOS
     public List<DTOPremios> Obtener(){
         List<PremiosEntity> lista = repo.findAll();
         return lista.stream().map(this::ConvertirAPremiosDTO).collect(Collectors.toList());
     }
+
+
 
 
 

@@ -1,7 +1,9 @@
 package APICRUD2_1.APICRUD2_1.Controllers;
 
 import APICRUD2_1.APICRUD2_1.Exceptions.ExceptionPremiosNoEncontrado;
+import APICRUD2_1.APICRUD2_1.Models.DTO.DTOPeliculas;
 import APICRUD2_1.APICRUD2_1.Models.DTO.DTOPremios;
+import APICRUD2_1.APICRUD2_1.Service.PeliculasService;
 import APICRUD2_1.APICRUD2_1.Service.PremiosServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -24,6 +26,14 @@ public class PremiosController {
 
     @Autowired
     private PremiosServices services;
+
+    @Autowired
+    PeliculasService peliculasService;
+
+    @GetMapping("/getPeliculas")
+    public List<DTOPeliculas> ObtenerPeliculas(){
+        return peliculasService.obtenerPeliculas();
+    }
 
     @GetMapping("/getPremios")
     public List<DTOPremios> obtenerPremios(){
@@ -83,7 +93,11 @@ public class PremiosController {
                     "message" , "Eliminado"
             ));
         }catch (ExceptionPremiosNoEncontrado e){
-            
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of(
+                    "status" , "Error",
+                    "message" , "Error no controlado al eliminar",
+                    "detail" , e.getMessage()
+            ));
         }
     }
 

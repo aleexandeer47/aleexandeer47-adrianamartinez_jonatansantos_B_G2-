@@ -2,6 +2,7 @@ package APICRUD2_1.APICRUD2_1.Entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.naming.Name;
 
@@ -13,9 +14,10 @@ import javax.naming.Name;
 @Table(name = "PREMIOS")
 public class PremiosEntity {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PREMIOS")
-    @SequenceGenerator(name = "premios" , sequenceName = "" , allocationSize = 1)
+    @SequenceGenerator(name = "seqPremio" , sequenceName = "" , allocationSize = 1)
     @Column(name = "ID_PREMIO")
     private  Long Id_Premio;
 
@@ -35,10 +37,13 @@ public class PremiosEntity {
     @Column(name = "FECHA_REGISTRO")
     private String Fecha_Registro;
 
+
     @ManyToOne
     @JoinColumn(name = "ID_PELICULA")
-    //@SequenceGenerator(name = "SEQ_PELICULAS" , sequenceName = "SEQ_PELICULAS" , allocationSize = 1)
+   // @SequenceGenerator(name = "SEQ_PELICULAS" , sequenceName = "SEQ_PELICULAS" , allocationSize = 1)
     private  Long Id_Pelicula;
+
+
 
 
 
